@@ -8,7 +8,7 @@ export class DeliveryZone {
     id: number;
 
     @Column()
-    name: string;
+    neighborhood: string;
 
     @Column('decimal', { precision: 10, scale: 2 })
     price: number;
