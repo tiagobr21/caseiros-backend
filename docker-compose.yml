@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  nest-api:
+    container_name: nest-api
+    build: .
+    ports:
+      - '${PORT}:3000'
+    depends_on:
+      - mysql-db
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - /app/node_modules
+    restart: always
+
+  mysql-db:
+    image: mysql:8.0
+    container_name: mysql-db
+    environment:
+      - MYSQL_HOSTNAME=${DB_HOSTNAME}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - mysql-data:/var/lib/mysql
+    restart: always
