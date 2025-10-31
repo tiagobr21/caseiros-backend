@@ -5,7 +5,8 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { ProductsModule } from './products/products.module';
-
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path/win32';
 
 @Module({
   imports: [
@@ -13,7 +14,11 @@ import { ProductsModule } from './products/products.module';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'uploads'),
+      serveRoot: '/uploads',
+    }),
+    
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DB_HOST,

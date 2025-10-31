@@ -1,14 +1,16 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Habilita CORS para o front-end (Next.js)
   app.enableCors({
-    origin: 'http://localhost:3001', // URL do seu Next.js
+    origin: 'http://localhost:3000',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-    credentials: true, // se usar cookies/autenticação
+    credentials: true,
   });
 
   await app.listen(4000);
