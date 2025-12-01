@@ -5,6 +5,9 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { ProductsModule } from './products/products.module';
+import { CartModule } from './cart/cart.module';
+import { DeliveryModule } from './delivery/delivery.module';
+import { OrderModule } from './orders/orders.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path/win32';
 
@@ -29,7 +32,10 @@ import { join } from 'path/win32';
       autoLoadEntities: true,
       synchronize: true
     }),
-    ProductsModule
+    ProductsModule,
+    CartModule,
+    DeliveryModule,
+    OrderModule
   ],
   controllers: [AppController],
   providers: [AppService],

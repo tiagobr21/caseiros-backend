@@ -1,5 +1,7 @@
-import { Controller, Get, Post, Put, Delete,  Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete,  Body, Param, UseInterceptors, UploadedFile, Res } from '@nestjs/common';
 import { ProductsService } from './products.service';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { Response } from 'express';
 
 @Controller('products')
 export class ProductsController {
@@ -28,5 +30,22 @@ export class ProductsController {
     @Delete(':id')
     delete(@Param('id') id: number) {
         return this.productsService.delete(id);
+    }
+
+    @Post('upload_image/:id')
+    @UseInterceptors(FileInterceptor('file'))
+    async uploadFile(
+        @Param('id') id:number,
+        @UploadedFile() file: Express.Multer.File,
+    ){
+        return this.productsService.insertImage(id, file);
+    }
+
+    @Get('image/:id')
+    async getImage(@Param('id') id:number, @Res() res: Response){
+      const img = await this.productsService.getImage(id);
+
+      res.setHeader('Content-Type','image/jpeg');
+      res.send(img);
     }
 }

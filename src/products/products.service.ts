@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm"
 import { Product } from "./entities/product.entity";
@@ -30,5 +30,27 @@ export class ProductsService {
 
     async delete(id: number) {
         await this.productsRepository.delete(id);
+    }
+
+    async insertImage(id: number, file: Express.Multer.File){
+        const product = await this.productsRepository.findOne({where: {id}});
+        if(!product) throw new NotFoundException('Product not found');
+
+        product.image = file.buffer;
+
+        return this.productsRepository.save(product)
+    }
+
+    async getImage(id: number){
+        const product = await this.productsRepository.findOne({
+            where:{id},
+            select: {image:true}
+        });
+
+        if(!product || !product.image){
+            throw new NotFoundException('Image not found');
+        }
+
+        return product.image;
     }
 }
