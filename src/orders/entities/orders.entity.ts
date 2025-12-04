@@ -28,8 +28,6 @@ export class Orders {
   @Column({ type: "decimal", precision: 10, scale: 2 })
   total: number;
 
-  @CreateDateColumn()
-  created_at: Date;
 
   @OneToMany(() => OrderItems, item => item.order, { cascade: true })
   items: OrderItems[];

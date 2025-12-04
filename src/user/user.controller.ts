@@ -1,9 +1,10 @@
-import { Body, Delete, Get, Injectable, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Injectable, Param, Post, Put } from "@nestjs/common";
 import { UserService } from "./user.service";
 import { User } from "./entities/user.entity";
 
 @Injectable()
 
+@Controller('users')   
 export class UserController {
     constructor(
     private userService: UserService) { }

@@ -9,6 +9,7 @@ import { CartModule } from './cart/cart.module';
 import { DeliveryModule } from './delivery/delivery.module';
 import { OrderModule } from './orders/orders.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
+import { AuthModule } from './auth/auth.module';
 import { join } from 'path/win32';
 
 @Module({
@@ -35,7 +36,8 @@ import { join } from 'path/win32';
     ProductsModule,
     CartModule,
     DeliveryModule,
-    OrderModule
+    OrderModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],

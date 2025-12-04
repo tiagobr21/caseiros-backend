@@ -9,6 +9,15 @@ export class User {
     name: string;
 
     @Column()
+    email: string;
+
+    @Column()
+    password: string;
+
+    @Column()
+    profile: string;
+
+    @Column()
     tel: number;
 
     @Column()
@@ -17,9 +26,6 @@ export class User {
     @Column()
     address: string;
 
-    @Column()
-    createdAt: Date;
-
-    @Column()
-    updatedAt: Date;
+   
+    
 }
