@@ -33,5 +33,15 @@ export class AuthService {
         email: user.email,
       },
     };
-  }
+    }
+    
+    async isvalidToken(token: string) {
+        try {
+            const verified = this.jwtService.verify(token);
+        
+            
+        } catch (e) {     
+            throw new UnauthorizedException("Token inválido");
+        }
+    }  
 }
