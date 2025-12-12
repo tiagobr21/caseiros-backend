@@ -25,6 +25,9 @@ export class AuthService {
   async login(user: any) {
     const payload = { sub: user.id, email: user.email };
 
+    console.log(payload);
+    
+
     return {
       token: this.jwtService.sign(payload),
       user: {
@@ -35,13 +38,23 @@ export class AuthService {
     };
     }
     
-    async isvalidToken(token: string) {
+  async isvalidToken(token: string) {
         try {
-            const verified = this.jwtService.verify(token);
-        
-            
-        } catch (e) {     
-            throw new UnauthorizedException("Token inválido");
+          const verify = this.jwtService.verify(token);
+          console.log(verify);
+          
+          if(verify)
+            return {
+              "message": "Token válido",
+              "statusCode": 200
+            };
+          
+        } catch (e) {
+           return {
+              "message": "Token válido",
+             "statusCode": 401,
+              "error": e.message
+            };
         }
     }  
 }

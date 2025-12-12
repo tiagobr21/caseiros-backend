@@ -14,6 +14,7 @@ export class AuthController {
    
    @Get("validate-token/:token") 
    async isValidToken(@Param('token') token:string) {
-     await this.authService.isvalidToken(token);
+     return await this.authService.isvalidToken(token);
+
    }
 }
