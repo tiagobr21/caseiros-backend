@@ -14,6 +14,19 @@ export class DeliveryService {
     return await this.deliveryRepo.find();
   }
 
+  async createZone(zoneData: DeliveryZone) {
+    const newZone = this.deliveryRepo.create(zoneData);
+    return await this.deliveryRepo.save(newZone);
+  }
+
+  async updateZone(zoneData: DeliveryZone, id: number) {
+    return await this.deliveryRepo.update(id, zoneData);
+  }
+
+  async deleteZone(id: number) {
+    return await this.deliveryRepo.delete(id);
+  }
+
   async getFrete(neighborhood: string): Promise<number> {
     const zone = await this.deliveryRepo.findOne({
       where: { neighborhood: neighborhood },
