@@ -13,7 +13,7 @@ async function bootstrap() {
     credentials: true,
   });
 
-  await app.listen(4001);
+  await app.listen(4000);
   console.log('🚀 Backend rodando em http://localhost:4000');
 }
 bootstrap();
