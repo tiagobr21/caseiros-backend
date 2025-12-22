@@ -25,10 +25,10 @@ import { join } from 'path/win32';
     
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: process.env.DB_HOST,
+      host: process.env.DB_HOSTNAME,
       port: parseInt(process.env.DB_PORT, 10),
       username: process.env.DB_USER,
-      password: process.env.DB_PASS,
+      password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       autoLoadEntities: true,
       synchronize: true
